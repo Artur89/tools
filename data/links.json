@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Default.aspx",
+    "test": "Online Store"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/List.aspx?sel=DTP&ctrl=f&fc_seg_home=1",
+    "test": "plp-hidden__messages"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=P1K69EA&opt=ABU&sel=DTP",
+    "test": "rating__star rating__star--active"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=Y1C44EA&opt=ABU&sel=DTP",
+    "test": "HP Pavilion 27-a155na All-in-One"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=Y4K56EA&opt=ABU&sel=DTP",
+    "test": "rating__star rating__star--active"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=Y6X36EA&opt=ABU&sel=DTP",
+    "test": "rating__star rating__star--active"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=T1H64EA&opt=ABU&sel=DTP",
+    "test": "Technical details"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Product.aspx?id=V1C43EA&opt=ABU&sel=NTB",
+    "test": "HP EliteBook Folio 12.5&quot;  4K Touchscreen Laptop"
+  },
+  {
+    "url": "https://store.hp.com/UKStore/Merch/Login.aspx?ReturnUrl=http://store.hp.com/UKStore/default.aspx?v=mar1",
+    "test": "Sign In"
+  }
+]
