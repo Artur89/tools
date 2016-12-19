@@ -22,5 +22,6 @@ In `/data/links.json` you'll find following structure:
 Run ```npm run links``` to execute
 
 ### escape
-Replaces String from clipboard with RegExp escaped characters
+Replaces String from clipboard with RegExp escaped characters.
+
 Run ```npm run escape``` to execute

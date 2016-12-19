@@ -1,5 +1,5 @@
 // Dependencies
-var https = require('https'),
+var request = require('request'),
     chalk = require('chalk');
 
 // Data
@@ -7,39 +7,47 @@ var arr = require('../data/links.json');
 
 // Variables
 var pass = 0,
-    fail = 0;
+    fail = 0,
+    totalTime = Date.now();
 
 Promise.all(arr.map(function(obj) {
     return new Promise(function(resolve, reject) {
         // Make request
-        https.get(obj.url, function(res) {
-            var time = Date.now(),
-                diff,
-                dom = '',
-                found;
+        request
+            .get(obj.url)
+            .on('response', function(res) {
+                var time = Date.now(),
+                    diff,
+                    dom = '',
+                    found;
 
-            res.on('data', function(chunk) {
-                dom += chunk;
-            });
-            res.on('end', function() {
-                // Stop timer
-                diff = time - Date.now();
+                if(res.statusCode === 200) {
+                    res.on('data', function(chunk) {
+                        dom += chunk;
+                    });
+                    res.on('end', function() {
+                        // Stop timer
+                        diff = time - Date.now();
 
-                // Find test String in DOM
-                found = dom.indexOf(obj.test) > -1;
-                
-                // Increase counter
-                found ? pass++ : fail++;
+                        // Find test String in DOM
+                        found = dom.indexOf(obj.test) > -1;
+                        
+                        // Increase counter
+                        found ? pass++ : fail++;
 
-                // Output
-                if(found) {
-                    console.log(chalk.green('[+]') + ' Text: ' + chalk.green(obj.test) + ' found here: ' + chalk.magenta(obj.url) + ', request takes: ' + Math.abs(diff) + 'ms');
+                        // Output
+                        if(found) {
+                            console.log(chalk.green('[+]') + ' Text: ' + chalk.green(obj.test) + ' found here: ' + chalk.magenta(obj.url) + ', request takes: ' + Math.abs(diff) + 'ms');
+                        } else {
+                            console.log(chalk.red('[-]') + ' Text: ' + chalk.red(obj.test) + ' not found here: ' + chalk.red(obj.url) + ', request takes: ' + Math.abs(diff) + 'ms');
+                        }
+                        resolve();
+                    });
                 } else {
-                    console.log(chalk.red('[-]') + ' Text: ' + chalk.red(obj.test) + ' not found here: ' + chalk.red(obj.url) + ', request takes: ' + Math.abs(diff) + 'ms');
+                    reject();
                 }
-                resolve();
-            });
-        })
+
+        });
     });
 })).then(function() {
     // Final output
@@ -50,5 +58,6 @@ Promise.all(arr.map(function(obj) {
         console.log(chalk.green('\nTotal: passed: ' + pass));
         console.log(chalk.red('Total failed: ' + fail));
     }
+    console.log('Total time spent:', Math.abs(totalTime - Date.now()) + 'ms');
 })
 
